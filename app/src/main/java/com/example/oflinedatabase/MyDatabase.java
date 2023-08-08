@@ -2,9 +2,9 @@ package com.example.oflinedatabase;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -42,10 +42,20 @@ public class MyDatabase extends SQLiteOpenHelper {
 
         double myvalue = dob.insert(TABLE_NAME, null, cv);
 
-        if (myvalue < 0) {
-//            Toast.makeText(context.getApplicationContext(), "not uploaded", Toast.LENGTH_SHORT).show();
-        } else {
-//            Toast.makeText(context.getApplicationContext(), "SUccess", Toast.LENGTH_SHORT).show();
-        }
+//        if (myvalue < 0) {
+////            Toast.makeText(context.getApplicationContext(), "not uploaded", Toast.LENGTH_SHORT).show();
+//        } else {
+////            Toast.makeText(context.getApplicationContext(), "SUccess", Toast.LENGTH_SHORT).show();
+//        }
     }
+
+    public Cursor getData(MyDatabase db) {
+
+        SQLiteDatabase DOB = db.getReadableDatabase();
+        String[] col = {USERNAME, PASSWORD};
+        Cursor cr = DOB.query(false, TABLE_NAME, col, null, null, null, null, null, null);
+
+        return cr;
+    }
+
 }
